@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Application
+Name=Jepret
+GenericName=Screenshot & Anotasi
+Comment=Tangkap area atau jendela, beri panah dan nomor urut, lalu simpan atau salin
+Exec=JEPRET_EXEC
+Icon=id.jepret.Jepret
+Terminal=false
+Categories=Graphics;2DGraphics;RasterGraphics;
+Keywords=screenshot;tangkapan layar;capture;anotasi;panah;
+StartupNotify=true
+StartupWMClass=id.jepret.Jepret
+Actions=Area;Window;Full;
+
+[Desktop Action Area]
+Name=Tangkap area
+Exec=JEPRET_EXEC --area
+
+[Desktop Action Window]
+Name=Tangkap jendela
+Exec=JEPRET_EXEC --window
+
+[Desktop Action Full]
+Name=Tangkap layar penuh
+Exec=JEPRET_EXEC --full
