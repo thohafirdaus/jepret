@@ -39,6 +39,48 @@ lalu simpan atau salin ke clipboard.
 - Salin ke clipboard (`Ctrl+C`)
 - Riwayat screenshot dengan thumbnail: buka lagi, salin, hapus
 
+## Unduh & pasang
+
+### Ubuntu / Debian (paling mudah)
+
+Ambil `jepret_<versi>_all.deb` dari [halaman Releases](https://github.com/thohafirdaus/jepret/releases), lalu:
+
+```bash
+sudo apt install ./jepret_1.0.0_all.deb
+```
+
+`apt` akan menarik sendiri semua paket yang dibutuhkan. Setelah itu Jepret ada
+di menu aplikasi, dan perintah `jepret` tersedia di terminal.
+
+Menghapusnya: `sudo apt remove jepret`
+
+### Distro lain
+
+Unduh `jepret-<versi>.tar.gz` dari Releases, lalu:
+
+```bash
+tar -xzf jepret-1.0.0.tar.gz
+cd jepret-1.0.0
+./install.sh          # memasang ke ~/.local, tanpa root
+```
+
+Pastikan paket berikut sudah ada lewat manajer paket distro Anda:
+`python3-gi`, `python3-gi-cairo`, GTK 4, libadwaita, Pillow, dan
+`xdg-desktop-portal` beserta backend desktop Anda.
+
+### Dari kode sumber
+
+```bash
+git clone https://github.com/thohafirdaus/jepret.git
+cd jepret && ./install.sh
+```
+
+### Membangun paketnya sendiri
+
+```bash
+./packaging/build.sh   # menghasilkan dist/*.deb dan dist/*.tar.gz
+```
+
 ## Prasyarat
 
 ```bash

@@ -20,7 +20,22 @@ from .document import Document  # noqa: E402
 from .editor import CSS, EditorWindow  # noqa: E402
 from .overlay import AreaSelector  # noqa: E402
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+def _data_dirs():
+    """Lokasi folder `data` untuk semua cara pemasangan.
+
+    Urutan: menjalankan langsung dari sumber, lalu pemasangan sistem
+    (paket .deb / install.sh dengan prefix), lalu folder data milik user.
+    """
+    candidates = [
+        Path(__file__).resolve().parent.parent / "data",
+        Path("/usr/share/jepret/data"),
+        Path("/usr/local/share/jepret/data"),
+        Path.home() / ".local/share/jepret/data",
+    ]
+    return [path for path in candidates if path.is_dir()]
+
+
+DATA_DIR = next(iter(_data_dirs()), Path(__file__).resolve().parent.parent / "data")
 
 
 class JepretApp(Adw.Application):
@@ -51,7 +66,8 @@ class JepretApp(Adw.Application):
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
-        theme.add_search_path(str(DATA_DIR / "icons"))
+        for data_dir in _data_dirs():
+            theme.add_search_path(str(data_dir / "icons"))
         # pindahkan pintasan yang masih memakai nama aplikasi lama
         from . import shortcuts
         shortcuts.migrate_legacy()
